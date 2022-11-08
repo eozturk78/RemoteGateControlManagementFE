@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <label translate="search"></label>
+      <input
+        class="form-control search-input"
+        [(ngModel)]="searchText"
+        (keydown.enter)="onSearch()"
+      />
+      <button
+        class="btn btn-primary search-input-button"
+        (click)="onSearch()"
+        translate="search"
+      ></button>
+    </div>
+    <div class="col-sm-9 text-right">
+      <a
+        [routerLink]="'/main/device-detail'"
+        class="btn btn-light btn-list-new"
+      >
+        <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+          translate="new"
+        ></span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title" translate="devices"></h4>
+      <div *ngIf="records != null">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th translate="serial_number"></th>
+                <th translate="ip_address"></th>
+                <th translate="ssid"></th>
+                <th translate="password"></th>
+                <th width="20px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let user of records
+                | slice
+                  : (page - 1) * pageSize
+                  : (page - 1) * pageSize + pageSize;
+              let i = index"
+                (click)="onOpenDetail(user.deviceId)"
+              >
+                <td>{{ user.serialNumber }}</td>
+                <td>{{ user.ipAddress }}</td>
+                <td>{{ user.ssId }}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                  <a
+                    [routerLink]="'/main/device-detail' + user.deviceId"
+                    class="btn btn-light"
+                    translate="..."
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
+        <ngb-pagination
+          [collectionSize]="records.length"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          [maxSize]="5"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

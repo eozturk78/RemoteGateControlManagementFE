@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="search"></label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchText"
+            (keydown.enter)="onSearch()"
+          />
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button
+          (click)="onSearch()"
+          style="margin-top: 30px"
+          type="button"
+          class="btn btn-danger"
+        >
+          <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span
+            translate="search"
+          ></span>
+        </button>
+      </div>
+      <div class="col-sm-7 text-right">
+        <button
+          (click)="onSubmit()"
+          type="button"
+          class="btn btn-danger"
+          style="margin-top: 30px"
+        >
+          <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span
+            translate="save"
+          ></span>
+        </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 class="card-title" translate="static_translation"></h4>
+          </div>
+          <div class="col-sm-6 text-right">
+            <button
+              (click)="onAddNewResource()"
+              type="button"
+              class="btn btn-light"
+            >
+              <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+                translate="new"
+              ></span>
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" width="200" translate="resource_name"></th>
+                <th scope="col" *ngFor="let l of languageList">
+                  {{ l.languageName }}
+                </th>
+                <th scope="col" width="30"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let trans of records
+                    | slice
+                      : (page - 1) * pageSize
+                      : (page - 1) * pageSize + pageSize;
+                  let i = index
+                "
+              >
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="trans.ResourceName"
+                  />
+                </td>
+                <td *ngFor="let t of trans.Translations">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="{{ trans.ResourceName }}-{{ t.LanguageId }}"
+                    [(ngModel)]="t.Translate"
+                  />
+                </td>
+                <td align="center">
+                  <app-mdl-delete-confirm
+                    style="margin-top: -12px"
+                    (confirmDelete)="onDeleteConfirm(i)"
+                  ></app-mdl-delete-confirm>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ngb-pagination
+          [collectionSize]="records.length"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          [maxSize]="5"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

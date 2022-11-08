@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 form-group">
+      <label translate="country"></label>
+      <select
+      class="form-control"
+        type="text"
+        id="countryId"
+        [(ngModel)]="countryId"
+        (change)="onChangeCountry()"
+      >
+        <option
+          *ngFor="let item of countryList"
+          [value]="item.countryId"
+        >
+          {{ item.countryName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label translate="city"></label>
+      <select
+      class="form-control"
+        type="text"
+        id="cityId"
+        [(ngModel)]="cityId"
+        (change)="onSearch()"
+      >
+        <option [selected]="cityId == null || cityId == ''"  [value]="''"><span translate="all"></span></option>
+        <option *ngFor="let item of cityList" [value]="item.cityId">
+          {{ item.cityName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label translate="search"></label>
+      <input
+        class="form-control search-input"
+        [(ngModel)]="searchText"
+        (keydown.enter)="onSearch()"
+      />
+      <button
+        class="btn btn-primary search-input-button"
+        (click)="onSearch()"
+        translate="search"
+      ></button>
+    </div>
+    <div class="col-sm-3 text-right">
+      <a [routerLink]="'/main/site-detail'" class="btn btn-light btn-list-new">
+        <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+          translate="new"
+        ></span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <h4 class="card-title" translate="rep_user_list"></h4>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th translate="building_name"></th>
+              <th translate="country"></th>
+              <th translate="city"></th>
+              <th translate="user_title"></th>
+              <th translate="email"></th>
+              <th translate="phone_number"></th>
+              <th translate="open_door_count"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let user of userResp?.records"
+            >
+              <td>{{ user.siteName }}</td>
+              <td>{{ user.countryName }}</td>
+              <td>{{ user.cityName }}</td>
+              <td>{{ user.userTitle }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>{{ user.openDoorRequestCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

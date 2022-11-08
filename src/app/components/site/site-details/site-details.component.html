@@ -1,0 +1,315 @@
+<div class="row">
+  <div class="col-sm-12">
+    <a href="/main/sites" class="btn btn-light"
+      ><i class="fa fa-arrow-left"></i><span translate="turn_to_list"></span
+    ></a>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="col-sm-6 offset-sm-3">
+      <form (submit)="onSubmit()" method="post" [formGroup]="form">
+        <div class="input-container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-12 form-group">
+                  <label translate="building_name"></label>
+                  <input
+                    type="text"
+                    id="buildingName"
+                    name="buildingName"
+                    class="form-control"
+                    formControlName="buildingName"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      submitted &&
+                      f!['buildingName'].errors &&
+                      f!['buildingName'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label translate="country"></label>
+                  <select
+                    type="text"
+                    id="countryId"
+                    name="countryId"
+                    class="form-control select2"
+                    formControlName="countryId"
+                    (change)="onChangeCountry()"
+                  >
+                    <option
+                      *ngFor="let item of countryList"
+                      [value]="item.countryId"
+                    >
+                      {{ item.countryName }}
+                    </option>
+                  </select>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      submitted &&
+                      f!['countryId'].errors &&
+                      f!['countryId'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label translate="city"></label>
+                  <select
+                    type="text"
+                    id="cityId"
+                    name="cityId"
+                    class="form-control select2"
+                    formControlName="cityId"
+                  >
+                    <option *ngFor="let item of cityList" [value]="item.cityId">
+                      {{ item.cityName }}
+                    </option>
+                  </select>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      submitted &&
+                      f!['cityId'].errors &&
+                      f!['cityId'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                  <label translate="address"></label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    class="form-control"
+                    formControlName="address"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      submitted &&
+                      f!['address'].errors &&
+                      f!['address'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-sm-12 text-right">
+            <button
+              type="submit"
+              class="btn btn-danger"
+              translate="send"
+            ></button>
+            <app-mdl-delete-confirm
+              (confirmDelete)="onDelete()"
+              *ngIf="siteId != null"
+            ></app-mdl-delete-confirm>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+<div *ngIf="f['siteId'].value != null">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="active">
+    <li [ngbNavItem]="0">
+      <a ngbNavLink translate="site_managers"></a>
+      <ng-template ngbNavContent>
+        <div class="card" *ngIf="f['siteId'].value != null">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6"><h4 translate="site_managers"></h4></div>
+              <div class="col-sm-6 text-right">
+                <a
+                  (click)="onOpenSiteManagerDetail()"
+                  class="btn btn-light"
+                  translate="new"
+                ></a>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th translate="user_title"></th>
+                    <th translate="email"></th>
+                    <th translate="phone_number"></th>
+                    <th width="170px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let site of siteManagerResp?.records; let i = index"
+                  >
+                    <td (click)="onOpenSiteManagerDetail(site.siteManagerId)">
+                      {{ site.userTitle }}
+                    </td>
+                    <td (click)="onOpenSiteManagerDetail(site.siteManagerId)">
+                      {{ site.email }}
+                    </td>
+                    <td (click)="onOpenSiteManagerDetail(site.siteManagerId)">
+                      {{ site.phoneNumber }}
+                    </td>
+                    <td>
+                      <app-mdl-delete-confirm
+                        (confirmDelete)="
+                          onDeleteSiteDevice(site.siteManagerId, i)
+                        "
+                        style="float: left"
+                        *ngIf="siteId != null"
+                      ></app-mdl-delete-confirm
+                      >&nbsp;&nbsp;
+                      <a
+                        class="btn btn-light"
+                        translate="..."
+                        (click)="onOpenSiteManagerDetail(site.siteManagerId)"
+                      ></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="1">
+      <a ngbNavLink translate="devices"></a>
+      <ng-template ngbNavContent>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6"><h4 translate="devices"></h4></div>
+              <div class="col-sm-6 text-right">
+                <a
+                  (click)="onOpenDeviceDetail()"
+                  class="btn btn-light"
+                  translate="new"
+                ></a>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th translate="serial_number"></th>
+                    <th translate="ip_address"></th>
+                    <th translate="device_location"></th>
+                    <th width="170px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let site of siteDeviceResp?.records; let i = index"
+                  >
+                    <td>
+                      {{ site.serialNumber }}
+                    </td>
+                    <td>
+                      {{ site.ipAddress }}
+                    </td>
+                    <td>
+                      <i class="typcn typcn-map" style="font-size: 30px;"
+                      (click)="onOpenDeviceDetail(site)"></i>
+                    </td>
+                    <td>
+                      <app-mdl-delete-confirm
+                        (confirmDelete)="onDeleteDevice(site.siteDeviceId, i)"
+                        style="float: left"
+                        *ngIf="siteId != null"
+                      ></app-mdl-delete-confirm
+                      >&nbsp;&nbsp;
+                      <button
+                        class="btn btn-light"
+                        translate="..."
+                        (click)="onOpenSiteDeviceDetail(site.deviceId)"
+                      ></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink translate="users"></a>
+      <ng-template ngbNavContent>
+        <div class="card" *ngIf="f['siteId'].value != null">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6"><h4 translate="users"></h4></div>
+              <div class="col-sm-6 text-right">
+                <a
+                  (click)="onOpenSiteUserDetail()"
+                  class="btn btn-light"
+                  translate="new"
+                ></a>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th translate="user_title"></th>
+                    <th translate="email"></th>
+                    <th translate="phone_number"></th>
+                    <th width="170px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let site of siteUserResp?.records; let i = index">
+                    <td (click)="onOpenSiteUserDetail(site.siteUserId)">
+                      {{ site.userTitle }}
+                    </td>
+                    <td (click)="onOpenSiteUserDetail(site.siteUserId)">
+                      {{ site.email }}
+                    </td>
+                    <td (click)="onOpenSiteUserDetail(site.siteUserId)">
+                      {{ site.phoneNumber }}
+                    </td>
+                    <td>
+                      <app-mdl-delete-confirm
+                        (confirmDelete)="onDeleteSiteUser(site.siteUserId, i)"
+                        style="float: left"
+                        *ngIf="siteId != null"
+                      ></app-mdl-delete-confirm
+                      >&nbsp;&nbsp;
+                      <a
+                        class="btn btn-light"
+                        translate="..."
+                        (click)="onOpenSiteUserDetail(site.siteUserId)"
+                      ></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</div>
+<br />
+<br />
+
+<br />

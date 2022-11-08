@@ -1,0 +1,163 @@
+<div class="row">
+  <div class="col-sm-12">
+    <a href="/main/devices" class="btn btn-light"
+      ><i class="fa fa-arrow-left"></i>&nbsp;<span
+        translate="turn_to_list"
+      ></span
+    ></a>
+  </div>
+
+</div>
+  <div class="card">
+    <div class="card-body">
+      <div class="col-sm-6 offset-sm-3">
+        <form (submit)="onSubmit()" method="post" [formGroup]="form">
+          <div class="input-container">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label translate="serial_number"></label>
+                    <input
+                      type="text"
+                      id="serialNumber"
+                      name="serialNumber"
+                      class="form-control"
+                      formControlName="serialNumber"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['serialNumber'].errors &&
+                        f!['serialNumber'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <label translate="ip_address"></label>
+                    <input
+                      type="text"
+                      id="ipAddress"
+                      name="ipAddress"
+                      class="form-control"
+                      formControlName="ipAddress"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['ipAddress'].errors &&
+                        f!['ipAddress'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <label translate="ssid"></label>
+                    <input
+                      type="text"
+                      id="ssId"
+                      name="ssId"
+                      class="form-control"
+                      formControlName="ssId"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['ssId'].errors &&
+                        f!['ssId'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <label translate="password"></label>
+                    <input
+                      type="text"
+                      id="password"
+                      name="password"
+                      class="form-control"
+                      formControlName="password"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['password'].errors &&
+                        f!['password'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 text-right">
+                <a
+                  (click)="addNewUrl()"
+                  class="btn btn-light"
+                  translate="new"
+                ></a>
+              </div>
+              <div class="col-sm-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="20px"></th>
+                      <th translate="name"></th>
+                      <th translate="url"></th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    formArrayName="urls"
+                    *ngFor="
+                      let item of getUrls?.controls;
+                      let i = index;
+                      let last = last
+                    "
+                  >
+                    <tr [formGroupName]="i">
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                        <input
+                          class="form-control"
+                          formControlName="name"
+                          id="name{{ i }}"
+                          name="name{{ i }}"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          class="form-control"
+                          formControlName="url"
+                          id="url{{ i }}"
+                          name="url{{ i }}"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-sm-12 text-right">
+              <button
+                type="submit"
+                class="btn btn-danger"
+                translate="send"
+              ></button>
+              <app-mdl-delete-confirm
+                (confirmDelete)="onDelete()"
+                *ngIf="deviceId != null"
+              ></app-mdl-delete-confirm>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

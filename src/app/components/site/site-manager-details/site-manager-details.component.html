@@ -1,0 +1,95 @@
+<div class="card">
+  <div class="card-body">
+    <div class="col-sm-12">
+      <div class="card-title" translate="site_manager"></div>
+      <form (submit)="onSubmit()" method="post" [formGroup]="form">
+        <div class="input-container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-6 form-group">
+                  <label translate="email"></label>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    formControlName="email"
+                  />
+                  <div
+                    class="required-text"
+                    *ngIf="
+                      submitted &&
+                      f!['email'].errors &&
+                      f!['email'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label translate="user_title"></label>
+                  <input
+                    type="text"
+                    id="userTitle"
+                    name="userTitle"
+                    class="form-control"
+                    formControlName="userTitle"
+                  />
+                  <div
+                    class="required-text"
+                    *ngIf="
+                      submitted &&
+                      f!['userTitle'].errors &&
+                      f!['userTitle'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label translate="phone_number"></label>
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    class="form-control"
+                    formControlName="phoneNumber"
+                  />
+                  <div
+                    class="required-text"
+                    *ngIf="
+                      submitted &&
+                      f!['phoneNumber'].errors &&
+                      f!['phoneNumber'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-sm-6">
+            <button
+              type="submit"
+              class="btn btn-primary mr-2"
+              translate="send"
+            ></button>
+          </div>
+          <div class="col-sm-6 text-right" *ngIf="siteManagerId != null">
+            <button
+              type="button"
+              class="btn btn-danger btn-icon-text"
+              (click)="resendPasswordEmail()"
+            >
+              <i class="typcn typcn-mail btn-icon-prepend"></i>
+              <span translate="resend_password"></span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="col-sm-12">
+  <a href="/main/users" class="btn btn-light"
+    ><i class="fa fa-arrow-left"></i>&nbsp;<span translate="turn_to_list"></span
+  ></a>
+</div>
+<div class="col-sm-6 offset-sm-3 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title" translate="user">
+      </div>
+        <form (submit)="onSubmit()" method="post" [formGroup]="form">
+          <div class="input-container">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label translate="email"></label>
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      class="form-control"
+                      formControlName="email"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['email'].errors &&
+                        f!['email'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <label translate="user_title"></label>
+                    <input
+                      type="text"
+                      id="userTitle"
+                      name="userTitle"
+                      class="form-control"
+                      formControlName="userTitle"
+                    />
+                    <div
+                      class="required-text"
+                      *ngIf="
+                        submitted &&
+                        f!['userTitle'].errors &&
+                        f!['userTitle'].errors['required']
+                      "
+                      translate="this_field_required"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-sm-6">
+              <button
+                type="submit"
+                class="btn btn-primary mr-2"
+                translate="send"
+              ></button>
+              <app-mdl-delete-confirm
+                (confirmDelete)="onDelete()"
+                *ngIf="userId != null"
+              ></app-mdl-delete-confirm>
+            </div>
+            <div class="col-sm-6 text-right"
+            *ngIf="userId != null">
+
+              <button type="button" class="btn btn-danger btn-icon-text"
+              (click)="resendPasswordEmail()">
+                <i class="typcn typcn-mail btn-icon-prepend"></i>
+                <span
+                translate="resend_password"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

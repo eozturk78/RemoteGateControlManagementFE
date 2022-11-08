@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-12 ">
+    <div class="text-right">
+      <button
+        class="btn btn-danger"
+        translate="send"
+        (click)="onSubmit()"
+      ></button>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title" translate="system_parameters">
+          <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="active">
+            <li
+              *ngFor="let sys of sysParameterList; let i = index"
+              [ngbNavItem]="i">
+              <a ngbNavLink translate="{{sys.GroupName}}"></a>
+              <ng-template ngbNavContent>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" translate="parameter"></th>
+                      <th scope="col" translate="value"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let params of sys.Parameters">
+                      <td scope="row" translate="{{ params.ParameterName }}"></td>
+                      <td>
+                        <div class="form-group mb-0">
+                          <select
+                            name=""
+                            id=""
+                            *ngIf="params.ParameterType === 1"
+                            class="form-control"
+                            [(ngModel)]="params.Value"
+                          >
+                            <option value="null" translate="choose"></option>
+                            <option
+                              value="{{ opt.Id }}"
+                              *ngFor="let opt of params.Options"
+                            >
+                              {{ opt.Description }}
+                            </option>
+                          </select>
+                          <input
+                            type="text"
+                            class="form-control"
+                            *ngIf="params.ParameterType === 2"
+                            [(ngModel)]="params.Value"
+                          />
+                          <input
+                            type="text"
+                            class="form-control"
+                            *ngIf="params.ParameterType === 3"
+                            [(ngModel)]="params.Value"
+                          />
+                          <input
+                            type="text"
+                            class="form-control"
+                            *ngIf="params.ParameterType === 4"
+                            [(ngModel)]="params.Value"
+                          />
+                          <input
+                            type="date"
+                            class="form-control"
+                            *ngIf="params.ParameterType === 5"
+                            [(ngModel)]="params.Value"
+                          />
+                          <input
+                            type="checkbox"
+                            *ngIf="params.ParameterType === 6"
+                            [(ngModel)]="params.Value"
+                          />
+                        </div>
+                      </td>
+                      <td align="center">
+                        <button
+                          class="btn btn-default"
+                          type="button"
+                          (click)="onDeleteValue(params)"
+                        >
+                          <i class="fa fa-times"></i>&nbsp;&nbsp;
+                          <span translate="delete"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

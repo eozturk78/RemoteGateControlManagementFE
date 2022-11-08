@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <label translate="search"></label>
+      <input
+        class="form-control search-input"
+        [(ngModel)]="searchText"
+        (keydown.enter)="onSearch()"
+      />
+      <button
+        class="btn btn-primary search-input-button"
+        (click)="onSearch()"
+        translate="search"
+      ></button>
+    </div>
+    <div class="col-sm-9 text-right">
+      <a [routerLink]="'/main/user-detail'" class="btn btn-light btn-list-new">
+        <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+          translate="new"
+        ></span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <h4 class="card-title" translate="users"></h4>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th translate="user_title"></th>
+              <th translate="email"></th>
+              <th width="20px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let user of userResp?.records"
+              (click)="onOpenDetail(user.userId)"
+            >
+              <td>{{ user.userTitle }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <a
+                  [routerLink]="'/main/user-detail' + user.userId"
+                  class="btn btn-light"
+                  translate="..."
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

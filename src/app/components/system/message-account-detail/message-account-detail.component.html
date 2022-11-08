@@ -1,0 +1,242 @@
+<div class="col-sm-12">
+  <a href="/main/message-accounts" class="btn btn-light"
+    ><i class="fa fa-arrow-left"></i>&nbsp;<span translate="turn_to_list"></span
+  ></a>
+</div>
+<div class="col-sm-6 offset-sm-3">
+  <form (submit)="onSubmit()" method="post" [formGroup]="form">
+    <div class="input-container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label translate="account_type"></label>
+
+              <select
+                class="form-control"
+                id="messageAccountType"
+                name="messageAccountType"
+                class="form-control"
+                formControlName="messageAccountType"
+              >
+                <option *ngFor="let ut of accountTypeList" [value]="ut.id">
+                  {{ ut.description }}
+                </option>
+              </select>
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['messageAccountType'].errors &&
+                  f!['messageAccountType'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="account_name"></label>
+              <input
+                type="text"
+                id="messageAccountName"
+                name="messageAccountName"
+                class="form-control"
+                formControlName="messageAccountName"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['messageAccountName'].errors &&
+                  f!['messageAccountName'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="sender"></label>
+              <input
+                type="text"
+                id="senderName"
+                name="senderName"
+                class="form-control"
+                formControlName="senderName"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['senderName'].errors &&
+                  f!['senderName'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="email"></label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="form-control"
+                formControlName="email"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['email'].errors &&
+                  f!['email'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="number"></label>
+              <input
+                type="text"
+                id="number"
+                name="number"
+                class="form-control"
+                formControlName="number"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['number'].errors &&
+                  f!['number'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="host"></label>
+              <input
+                type="text"
+                id="server"
+                name="server"
+                class="form-control"
+                formControlName="server"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['server'].errors &&
+                  f!['server'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="user_name"></label>
+              <input
+                type="text"
+                id="userName"
+                name="userName"
+                class="form-control"
+                formControlName="userName"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['userName'].errors &&
+                  f!['userName'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="password"></label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                formControlName="password"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['password'].errors &&
+                  f!['password'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="port"></label>
+              <input
+                type="text"
+                id="port"
+                name="port"
+                class="form-control"
+                formControlName="port"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['port'].errors &&
+                  f!['port'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="ssl"></label><br />
+              <input
+                type="checkbox"
+                id="useSSL"
+                name="useSSL"
+                formControlName="useSSL"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['useSSL'].errors &&
+                  f!['useSSL'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label translate="domain"></label>
+              <input
+                type="domain"
+                id="domain"
+                name="domain"
+                class="form-control"
+                formControlName="domain"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['domain'].errors &&
+                  f!['domain'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <button type="submit" class="btn btn-danger" translate="send"></button
+        >&nbsp;&nbsp;
+        <app-mdl-delete-confirm
+          (confirmDelete)="onDelete()"
+          *ngIf="messageAccountId != null"
+        ></app-mdl-delete-confirm>
+      </div>
+    </div>
+  </form>
+</div>

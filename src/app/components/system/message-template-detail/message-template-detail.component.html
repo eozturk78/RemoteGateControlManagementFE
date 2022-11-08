@@ -1,0 +1,148 @@
+<div class="col-sm-12">
+  <a href="/main/message-templates" class="btn btn-light"
+    ><i class="fa fa-arrow-left"></i>&nbsp;<span translate="turn_to_list"></span
+  ></a>
+</div>
+<div class="col-sm-6 offset-sm-3">
+  <form (submit)="onSubmit()" method="post" [formGroup]="form!">
+    <div class="input-container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4 orm-group">
+              <label translate="message_account"></label>
+              <select
+                class="form-control"
+                formControlName="messageAccountId"
+                id="messageAccountId"
+                name="messageAccountId"
+              >
+                <option *ngFor="let ut of messageAccounts" [value]="ut.messageAccountId">
+                  {{ ut.messageAccountName }}
+                </option>
+              </select>
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f['messageAccountId'].errors &&
+                  f['messageAccountId'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-4 orm-group">
+              <label translate="template_type"></label>
+              <select
+                class="form-control"
+                formControlName="messageTemplateType"
+                id="messageTemplateType"
+                name="messageTemplateType"
+              >
+                <option *ngFor="let ut of templateTypes" [value]="ut.id">
+                  {{ ut.description }}
+                </option>
+              </select>
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f['messageTemplateType'].errors &&
+                  f['messageTemplateType'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+            <div class="col-sm-4 form-group">
+              <label translate="message_template_name"></label>
+              <input
+                type="text"
+                id="messageTemplateName"
+                name="messageTemplateName"
+                class="form-control"
+                formControlName="messageTemplateName"
+              />
+              <div
+                class="required-text"
+                *ngIf="
+                  submitted &&
+                  f!['messageTemplateName'].errors &&
+                  f!['messageTemplateName'].errors['required']
+                "
+                translate="this_field_required"
+              ></div>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-sm-12 form-group"
+              formArrayName="subjects"
+              *ngFor="let item of getSubjects.controls; let i = index"
+            >
+              <div [formGroupName]="i">
+                <label><span translate="subject"></span> {{
+                  fnGetLanguageName(item.get('languageId')?.value)
+                }}</label>
+                <input
+                  formControlName="translation"
+                  id="translation{{ i }}"
+                  name="translation{{ i }}"
+                  class="form-control"
+                />
+                <div
+                  class="required-text"
+                  *ngIf="
+                    submitted &&
+                    item.get('translation')?.errors &&
+                    (item.get('translation')?.errors)!['required']
+                  "
+                  translate="this_field_required"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-sm-12 form-group"
+              formArrayName="messageBodies"
+              *ngFor="let item of getMessageBodies.controls; let i = index"
+            >
+              <div [formGroupName]="i">
+                <label><span translate="message_body"></span> {{
+                  fnGetLanguageName(item.get('languageId')?.value)
+                }}</label>
+                <input
+                  formControlName="translation"
+                  id="translation{{ i }}"
+                  name="translation{{ i }}"
+                  class="form-control"
+                />
+                <div
+                  class="required-text"
+                  *ngIf="
+                    submitted &&
+                    item.get('translation')?.errors &&
+                    (item.get('translation')?.errors)!['required']
+                  "
+                  translate="this_field_required"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <button type="submit" class="btn btn-danger" translate="send"></button
+        >&nbsp;&nbsp;
+        <app-mdl-delete-confirm
+          (confirmDelete)="onDelete()"
+          *ngIf="messageTemplateId != null"
+        ></app-mdl-delete-confirm>
+      </div>
+    </div>
+  </form>
+</div>

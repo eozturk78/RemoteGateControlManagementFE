@@ -1,0 +1,91 @@
+<div class="card" #step1>
+  <div class="card-body">
+    <h4 class="card-title" translate="choose_device"></h4>
+    <div class="row">
+      <div class="col-sm-6">
+        <label translate="search"></label>
+        <input
+          class="form-control search-input"
+          [(ngModel)]="searchText"
+          (keydown.enter)="onSearch()"
+        />
+        <button
+          class="btn btn-light search-input-button"
+          (click)="onSearch()"
+          translate="search"
+        ></button>
+      </div>
+      <br />
+      <div class="col-sm-12">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th translate="serial_number"></th>
+                <th translate="ip_address"></th>
+                <th width="20px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let device of deviceResp?.records"
+                [ngClass]="{ 'red-backgroud': deviceId == device.deviceId }"
+                (click)="onChoose(device.deviceId)"
+              >
+                <td>{{ device.serialNumber }}</td>
+                <td>{{ device.ipAddress }}</td>
+                <td>
+                  <a class="btn btn-light" translate="choose"></a>
+                </td>
+              </tr>
+              <tr *ngIf="deviceResp?.records == null">
+                <td colspan="100%" translate="there_is_no_data"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <br>
+        <div class="text-right">
+          <button
+            class="btn btn-primary"
+            [disabled]="deviceId == null"
+            (click)="onClickGoToSecondStep()"
+            translate="next"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" #step2 style="display: none" s>
+  <div class="card-body">
+    <h4 class="card-title" translate="choose_location_device"></h4>
+    <agm-map
+      [latitude]="latitude"
+      [longitude]="longitude"
+      style="height: 400px"
+      [keyboardShortcuts]="false"
+      [zoom]="25"
+      (mapReady)="mapReadyHandler($event)"
+    >
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+    <br>
+    <div class="text-right">
+      <button
+        *ngIf="siteDevice?.siteDeviceId==null"
+        class="btn btn-light"
+        (click)="onClickGoBack()"
+        translate="back"
+      ></button>
+      &nbsp;
+      <button
+        class="btn btn-primary"
+        (click)="onSaveSiteDevice()"
+        translate="save"
+      ></button>
+    </div>
+  </div>
+</div>

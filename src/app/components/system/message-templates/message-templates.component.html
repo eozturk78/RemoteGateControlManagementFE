@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12 text-right">
+      <a [routerLink]="'/main/message-template-detail'" class="btn btn-ligh btn-list-new">
+        <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+          translate="new"
+        ></span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+      <div class="card-body">
+        <h4 class="card-title" translate="mesasage_templates"></h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th translate="message_template_name"></th>
+              <th width="40px"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of messageTemplateList?.records"
+            (click)="onOpenDetail(user.messageTemplateId)">
+              <td>{{user.messageTemplateName}}</td>
+              <td>
+                <a [routerLink]="'/main/message-template-detail/' + user.messageTemplateId" translate="..." class="btn btn-light"></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>

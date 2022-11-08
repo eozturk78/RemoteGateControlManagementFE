@@ -1,0 +1,10 @@
+<div style="position: absolute;
+bottom: 60px;z-index: 100000;"  [@listAnimation]="base.successMessage.length" >
+  <div class="success-component" *ngFor="let l of base.successMessage">
+    <b><i class="typcn typcn-input-checked" style="font-size: 25px;color: limegreen"></i> <span translate="success"></span></b>
+    <p translate="{{l}}"></p>
+  </div>
+  <div *ngIf="base.successMessage.length>0" class="success-component text-center" (click)="clearMessages()">
+    <a  translate="clear_all"></a>
+  </div>
+</div>

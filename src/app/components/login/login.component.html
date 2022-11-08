@@ -1,0 +1,31 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5">
+            <form (submit)="onSubmit()" [formGroup]="form">
+              <h3 class="mb-5" translate="sign_in"></h3>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="typeEmailX-2" translate="email"></label>
+                <input type="text" formControlName="email" id="email" id="typeEmailX-2" class="form-control form-control-lg" />
+                <div class="invalid-feedback" *ngIf="submitted && f['email'].errors && f['email'].errors['required']"
+                     translate="this_field_required"></div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="typePasswordX-2" translate="password"></label>
+                <input type="password" formControlName="password" id="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                <div class="invalid-feedback" *ngIf="submitted && f['password'].errors && f['password'].errors['required']"
+                translate="this_field_required"></div>
+              </div>
+              <button class="btn btn-primary btn-lg btn-block" type="submit" translate="login"></button>
+            </form>
+            <br>
+            <br>
+            <a [routerLink]="['/forgot-password']" translate="forgot_password"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
