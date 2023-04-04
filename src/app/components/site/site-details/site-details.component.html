@@ -271,6 +271,7 @@
                     <th translate="user_title"></th>
                     <th translate="email"></th>
                     <th translate="phone_number"></th>
+                    <th translate="description"></th>
                     <th width="170px"></th>
                   </tr>
                 </thead>
@@ -284,6 +285,9 @@
                     </td>
                     <td (click)="onOpenSiteUserDetail(site.siteUserId)">
                       {{ site.phoneNumber }}
+                    </td>
+                    <td (click)="onOpenSiteUserDetail(site.siteUserId)">
+                      {{ site.description }}
                     </td>
                     <td>
                       <app-mdl-delete-confirm

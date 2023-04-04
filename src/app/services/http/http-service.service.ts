@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, ViewChild, ElementRef } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { HandleError, HttpErrorHandler } from './http-error-handler.service';
@@ -10,7 +10,7 @@ import { BaseService } from '../base/base.service';
 })
 export class HttpServiceService {
   handleError: HandleError;
-  public baseUrl = 'https://api-sg.chatinuni.com';
+  public baseUrl = 'https://api.aesmartsystems.com';
 
   @ViewChild('errorMessage') errorMessage!: ElementRef<HTMLDivElement>;
 

@@ -111,12 +111,15 @@
                 <label><span translate="message_body"></span> {{
                   fnGetLanguageName(item.get('languageId')?.value)
                 }}</label>
-                <input
-                  formControlName="translation"
-                  id="translation{{ i }}"
-                  name="translation{{ i }}"
-                  class="form-control"
-                />
+                <textarea rows="10"
+                formControlName="translation"
+                id="translation{{ i }}"
+                name="translation{{ i }}"
+                class="form-control"
+
+                >
+
+                </textarea>
                 <div
                   class="required-text"
                   *ngIf="

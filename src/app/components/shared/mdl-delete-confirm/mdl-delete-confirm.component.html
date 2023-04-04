@@ -5,13 +5,17 @@
         <i class="fa fa-times"></i>
       </div>
     </div>
-    <p translate="are_you_sure_delete" class="text-center"></p>
+    <p translate="{{areYouSureText}}" class="text-center"></p>
     <div class="text-center">
       <button class="btn btn-primary mr-3" translate="yes" (click)="onConfirm()"></button>
       <button type="submit" class="btn btn-light" (click)="onCancel()" translate="no"></button>
     </div>
   </div>
 </ng-template>
-<button type="button" class="btn btn-light"  (click)="open(content)">
+<button type="button" class="btn btn-light"  (click)="open(content)" *ngIf="buttonText == null">
   <i class="typcn typcn-trash" style="font-size: 18px;"></i>
 </button>
+
+<button type="button" class="btn"
+[ngClass]="{'btn-danger' : isButtonRed == true, 'btn-light': isButtonRed == false}"
+(click)="open(content)" *ngIf="buttonText != null" translate="{{buttonText}}"></button>

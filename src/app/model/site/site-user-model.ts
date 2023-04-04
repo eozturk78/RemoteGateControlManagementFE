@@ -4,6 +4,7 @@ export interface SiteUser{
   userTitle: string;
   email: string;
   phoneNumber:string;
+  description: string;
 }
 
 export interface SiteUserResponse{

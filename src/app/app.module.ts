@@ -1,3 +1,4 @@
+import { SiteUserDescriptionComponent } from './components/site/site-user-description/site-user-description.component';
 import { SiteUserDetailsComponent } from './components/site/site-user-details/site-user-details.component';
 import { MdlDeviceListComponent } from './components/shared/mdl-device-list/mdl-device-list.component';
 import { SharedModule } from 'src/app/components/shared/shared.module';
@@ -13,7 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpServiceService } from './services/http/http-service.service';
 import {
   HttpClient,
@@ -30,7 +31,6 @@ import { SiteManagerDetailsComponent } from './components/site/site-manager-deta
 import { AgmCoreModule } from '@agm/core';
 import { ErrorMessageComponent } from './components/shared/error-message/error-message.component';
 import { SuccessMessageComponent } from './components/shared/success-message/success-message.component';
-import { RepUserListComponent } from './components/reports/rep-user-list/rep-user-list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { RepUserListComponent } from './components/reports/rep-user-list/rep-use
     LoginLayoutComponent,
     SiteManagerDetailsComponent,
     SiteUserDetailsComponent,
+    SiteUserDescriptionComponent,
     MdlDeviceListComponent,
     ErrorMessageComponent,
     SuccessMessageComponent
@@ -52,6 +53,7 @@ import { RepUserListComponent } from './components/reports/rep-user-list/rep-use
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -81,7 +83,7 @@ export class AppModule {}
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
-    'https://api-sg.chatinuni.com/resources/',
+    'https://api.aesmartsystems.com/resources/',
     '.json'
   );
 }

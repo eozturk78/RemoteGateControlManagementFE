@@ -36,6 +36,8 @@
                 <th translate="ip_address"></th>
                 <th translate="ssid"></th>
                 <th translate="password"></th>
+                <th translate="access_internet"></th>
+                <th translate="building_name"></th>
                 <th width="20px"></th>
               </tr>
             </thead>
@@ -52,6 +54,8 @@
                 <td>{{ user.ipAddress }}</td>
                 <td>{{ user.ssId }}</td>
                 <td>{{ user.password }}</td>
+                <td><span translate="yes" *ngIf="user.accessInternet"></span><span translate="no" *ngIf="!user.accessInternet"></span></td>
+                <td>{{ user.buildingName }}</td>
                 <td>
                   <a
                     [routerLink]="'/main/device-detail' + user.deviceId"

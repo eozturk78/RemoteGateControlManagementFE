@@ -21,6 +21,7 @@ export class SiteUserDetailsComponent implements OnInit {
     email: new FormControl("", [Validators.required]),
     userTitle: new FormControl("", [Validators.required]),
     phoneNumber: new FormControl("", [Validators.required]),
+    description: new FormControl(""),
   });
   constructor(private managmentService: ManagementService,
               private modalService: BsModalService) { }
@@ -33,6 +34,7 @@ export class SiteUserDetailsComponent implements OnInit {
     this.form.controls['siteUserId'].setValue(this.siteUserId);
     this.managmentService.getSiteUserDetail(this.siteUserId)
       .subscribe((data:SiteUserResponse)=>{
+        console.log(data.records[0])
         if(data.records!=null) this.form.setValue(data.records[0]);
       });
   }

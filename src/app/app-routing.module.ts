@@ -194,6 +194,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'site-users',
+        loadChildren: () =>
+          import('./components/site-user-list/site-user-list.module').then(
+            (m) => m.SiteUserListModule
+          ),
+      },
+      {
         path: 'rep-user-list',
         loadChildren: () =>
           import('./components/reports/rep-user-list/rep-user-list.module').then(

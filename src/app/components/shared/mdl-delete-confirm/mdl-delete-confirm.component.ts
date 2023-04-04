@@ -1,5 +1,5 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
-import {Component, OnInit, Output, EventEmitter, Injectable} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Injectable, Input} from '@angular/core';
 import {NgbModal, NgbModalConfig, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,6 +8,10 @@ import {NgbModal, NgbModalConfig, NgbModalRef} from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./mdl-delete-confirm.component.scss']
 })
 export class MdlDeleteConfirmComponent implements OnInit {
+
+  @Input() areYouSureText = "are_you_sure_delete";
+  @Input() buttonText: any;
+  @Input() isButtonRed = false;
 
   @Output() confirmDelete: EventEmitter<any> = new EventEmitter<any>();
   private modalRef: NgbModalRef | undefined;

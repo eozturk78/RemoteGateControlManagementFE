@@ -2,8 +2,10 @@ export interface Device {
   deviceId:string;
   serialNumber:string,
   ipAddress: string;
+  buildingName: string;
   ssId: string;
   password: string;
+  accessInternet: boolean;
   urls: Array<UrlModel>
 }
 

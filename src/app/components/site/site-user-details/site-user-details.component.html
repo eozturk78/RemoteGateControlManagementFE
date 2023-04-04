@@ -64,6 +64,25 @@
                     translate="this_field_required"
                   ></div>
                 </div>
+                <div class="col-sm-6 form-group">
+                  <label translate="description"></label>
+                  <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    class="form-control"
+                    formControlName="description"
+                  />
+                  <div
+                    class="required-text"
+                    *ngIf="
+                      submitted &&
+                      f!['description'].errors &&
+                      f!['description'].errors['required']
+                    "
+                    translate="this_field_required"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>

@@ -92,6 +92,15 @@
                       translate="this_field_required"
                     ></div>
                   </div>
+                  <div class="col-sm-6 form-group">
+                    <label translate="access_internet"></label><br>
+                    <input
+                      type="checkbox"
+                      id="accessInternet"
+                      name="accessInternet"
+                      formControlName="accessInternet"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="col-sm-12 text-right">
@@ -108,6 +117,7 @@
                       <th width="20px"></th>
                       <th translate="name"></th>
                       <th translate="url"></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody
@@ -135,6 +145,11 @@
                           id="url{{ i }}"
                           name="url{{ i }}"
                         />
+                      </td>
+                      <td>
+                        <app-mdl-delete-confirm
+                        (confirmDelete)="onDeleteUrl(i)"
+                      ></app-mdl-delete-confirm>
                       </td>
                     </tr>
                   </tbody>

@@ -19,6 +19,7 @@ export class DeviceDetailComponent implements OnInit {
     ipAddress: new FormControl("", [Validators.required]),
     ssId: new FormControl(""),
     password: new FormControl(""),
+    accessInternet: new FormControl(false),
     urls: this.fb.array([])
   });
   deviceId: string;
@@ -26,7 +27,7 @@ export class DeviceDetailComponent implements OnInit {
   get f() {
     return this.form?.controls;
   }
-  get getUrls(){
+  get getUrls(): FormArray{
     return this.form.get('urls') as FormArray;
   }
 
@@ -79,5 +80,9 @@ export class DeviceDetailComponent implements OnInit {
 
   addNewUrl(){
     this._urlList.push(this.createItem());
+  }
+
+  onDeleteUrl(index:number){
+     this._urlList.removeAt(index);
   }
 }

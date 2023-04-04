@@ -1,0 +1,122 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 form-group">
+      <label translate="country"></label>
+      <select
+        class="form-control"
+        type="text"
+        id="countryId"
+        [(ngModel)]="countryId"
+        (change)="onChangeCountry()"
+      >
+        <option *ngFor="let item of countryList" [value]="item.countryId">
+          {{ item.countryName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label translate="city"></label>
+      <select
+        class="form-control"
+        type="text"
+        id="cityId"
+        [(ngModel)]="cityId"
+        (change)="onSearch()"
+      >
+        <option [selected]="cityId == null || cityId == ''" [value]="''">
+          <span translate="all"></span>
+        </option>
+        <option *ngFor="let item of cityList" [value]="item.cityId">
+          {{ item.cityName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label translate="search"></label>
+      <input
+        class="form-control search-input"
+        [(ngModel)]="searchText"
+        (keydown.enter)="onSearch()"
+      />
+      <button
+        class="btn btn-primary search-input-button"
+        (click)="onSearch()"
+        translate="search"
+      ></button>
+    </div>
+    <div class="col-sm-3 text-right">
+      <a [routerLink]="'/main/site-detail'" class="btn btn-light btn-list-new">
+        <i class="typcn typcn-plus-outline"></i>&nbsp;<span
+          translate="new"
+        ></span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <h4 class="card-title" translate="rep_user_list"></h4>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th translate="user_title" (click)="onSortTitle()"></th>
+              <th translate="email"  (click)="onSortEmail()"></th>
+              <th translate="phone_number"  (click)="onSortPhoneNumber()"></th>
+              <th translate="is_confirmed" (click)="onSortIsConfirmed()"></th>
+              <th  ></th>
+              <th translate="last_open_date" (click)="onSortLastRequestDate()"></th>
+              <th translate="open_door_count" (click)="onSortOpenDoorCount()"></th>
+              <th translate="description"  (click)="onSortDescription()"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userList">
+              <td>{{ user.userTitle }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>
+                <i
+                  class="typcn typcn-input-checked"
+                  *ngIf="user.isConfirmed"
+                  style="font-size: 30px"
+                ></i>
+                <i
+                  class="typcn typcn-times"
+                  *ngIf="!user.isConfirmed"
+                  style="font-size: 30px"
+                ></i>
+              </td>
+              <td>
+                <app-mdl-delete-confirm
+                  [areYouSureText]="areYouSureCancelMemberShip"
+                  [buttonText]="cancelMembershipText"
+                  (confirmDelete)="confirmUser(user, 0)"
+                  [isButtonRed]="true"
+                  *ngIf="user.isConfirmed"
+                ></app-mdl-delete-confirm>
+                <app-mdl-delete-confirm
+                  (confirmDelete)="confirmUser(user, 1)"
+                  [areYouSureText]="activateMembershipText"
+                  [buttonText]="activateMembershipText"
+                  [isButtonRed]="false"
+                  *ngIf="!user.isConfirmed"
+                ></app-mdl-delete-confirm>
+              </td>
+              <td>{{ user.lastOpenGateDate  | date:'dd/MM/yy HH:mm'}}</td>
+              <td>{{ user.openDoorRequestCount }}</td>
+              <td>
+                <a translate="{{user.description}}" style="cursor: pointer;" (click)="onOpenDescriptionModal(user)"></a>
+
+                <button translate="add_description" class="btn btn-danger" *ngIf="user.description==null || user.description == ''" (click)="onOpenDescriptionModal(user)"></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

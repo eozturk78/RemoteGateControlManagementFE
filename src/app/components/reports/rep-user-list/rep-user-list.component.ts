@@ -20,6 +20,10 @@ export class RepUserListComponent implements OnInit {
   countryList!: Array<Country>;
   cityList!: Array<City>;
   userResp: ReportUserListResponse | undefined;
+  areYouSureCancelMemberShip = 'are_you_sure_cancel_membership';
+  cancelMembershipText = 'cancel_membership';
+  areYouSureActivateMemberShip = 'are_you_sure_activate_membership';
+  activateMembershipText = 'activate_membership';
   constructor(
     private managementService: ManagementService,
     private router: Router
@@ -51,4 +55,12 @@ export class RepUserListComponent implements OnInit {
       });
   }
 
+
+  confirmUser(user: RepUserListModel,confirmUser: number){
+    this.managementService
+      .confirmUser(user.userId, confirmUser)
+      .subscribe((data: any) => {
+        user.isConfirmed = user.isConfirmed ==true ? false : true;
+      });
+  }
 }

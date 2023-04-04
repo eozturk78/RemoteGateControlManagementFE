@@ -1,3 +1,5 @@
+import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LocalstorageService } from './../../services/local-storage-service/storage-service.service';
 import { LoginResponse } from './../../model/login/login-model';

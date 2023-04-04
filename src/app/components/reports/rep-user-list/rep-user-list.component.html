@@ -70,6 +70,8 @@
               <th translate="user_title"></th>
               <th translate="email"></th>
               <th translate="phone_number"></th>
+              <th translate="is_confirmed"></th>
+              <th></th>
               <th translate="open_door_count"></th>
             </tr>
           </thead>
@@ -83,6 +85,18 @@
               <td>{{ user.userTitle }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.phoneNumber }}</td>
+              <td>
+                <i class="typcn typcn-input-checked" *ngIf="user.isConfirmed" style="font-size: 30px;"></i>
+                <i class="typcn typcn-times" *ngIf="!user.isConfirmed" style="font-size: 30px;"></i>
+              </td>
+              <td>
+                <app-mdl-delete-confirm [areYouSureText]="areYouSureCancelMemberShip" [buttonText]="cancelMembershipText"
+                  (confirmDelete)="confirmUser(user,0)"
+                [isButtonRed]="true" *ngIf="user.isConfirmed"></app-mdl-delete-confirm>
+                <app-mdl-delete-confirm
+                (confirmDelete)="confirmUser(user, 1)" [areYouSureText]="activateMembershipText" [buttonText]="activateMembershipText" [isButtonRed]="false" *ngIf="!user.isConfirmed"></app-mdl-delete-confirm>
+
+              </td>
               <td>{{ user.openDoorRequestCount }}</td>
             </tr>
           </tbody>

@@ -269,6 +269,10 @@ export class ManagementService {
     if (id != null) url = `${url}?siteUserId=${id}`;
     return this.httpService.delete<SiteUserResponse>(url);
   }
+  updateSiteUserDescription(params: object): Observable<object> {
+    let url = `${this.baseUrl}/UpdateSiteUserDescription`;
+    return this.httpService.post<object>(url, params);
+  }
   //--
 
   //  -- GetCityList
@@ -276,6 +280,29 @@ export class ManagementService {
     let url = `${this.baseUrl}/GetCityList`;
     if (countryId != null) url = `${url}?countryId=${countryId}`;
     return this.httpService.get<CityResponse>(url);
+  }
+
+  //  -- GetCityList
+  confirmUser(userId?: string,confirmType?: number): Observable<CityResponse> {
+    let url = `${this.baseUrl}/ConfirmUser`;
+    if (userId != null) url = `${url}?userId=${userId}&confirmType=${confirmType}`;
+    return this.httpService.get<CityResponse>(url);
+  }
+  // -- Report
+  // -- User List Report
+
+  getAllSiteUserList(
+    siteId?: string,
+    countryId?: string,
+    cityId?: string,
+    searchText?: string
+  ): Observable<ReportUserListResponse> {
+    let url = `${this.baseUrl}/GetAllSiteUserList?1=1`;
+    if (siteId != null) url += `&siteId=${siteId}`;
+    if (countryId != null) url += `&countryId=${countryId}`;
+    if (cityId != null) url += `&cityId=${cityId}`;
+    if (searchText != null) url += `&searchText=${searchText}`;
+    return this.httpService.get<ReportUserListResponse>(url);
   }
 
   // -- Report
