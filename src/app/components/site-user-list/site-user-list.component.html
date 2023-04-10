@@ -56,13 +56,14 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-6">
-          <h4 class="card-title" translate="rep_user_list"></h4>
+          <h4 class="card-title"><span translate="rep_user_list"></span>&nbsp;<span>{{userList?.length}}</span></h4>
         </div>
       </div>
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
+              <th></th>
               <th translate="user_title" (click)="onSortTitle()"></th>
               <th translate="email"  (click)="onSortEmail()"></th>
               <th translate="phone_number"  (click)="onSortPhoneNumber()"></th>
@@ -74,7 +75,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of userList">
+            <tr *ngFor="let user of userList; let i = index">
+              <td>{{i+1}}</td>
               <td>{{ user.userTitle }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.phoneNumber }}</td>
